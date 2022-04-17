@@ -149,46 +149,133 @@
 
 // -------- Practica 2 ------- //
 
-const carrito  = document.getElementById("carrito");
-const template = document.getElementById("template");
-const fragment = document.createDocumentFragment();
-const botones  = document.querySelectorAll(".card .btn");
+// const carrito  = document.getElementById("carrito");
+// const template = document.getElementById("template");
+// const fragment = document.createDocumentFragment();
+// const botones  = document.querySelectorAll(".card .btn");
 
-const carritoObjeto = {};
+// const carritoObjeto = {};
 
-const agregarCarrito = (e) => {
-    console.log(e.target.dataset.fruit);
+// const agregarCarrito = (e) => {
+//     console.log(e.target.dataset.fruit);
 
-    const producto = {
-        titulo: e.target.dataset.fruit,
-        id: e.target.dataset.fruit,
-        cantidad: 1
-    }
+//     const producto = {
+//         titulo: e.target.dataset.fruit,
+//         id: e.target.dataset.fruit,
+//         cantidad: 1
+//     }
 
-    if (carritoObjeto.hasOwnProperty(producto.titulo)){
-        producto.cantidad = carritoObjeto[producto.titulo].cantidad + 1;
-    }
+//     if (carritoObjeto.hasOwnProperty(producto.titulo)){
+//         producto.cantidad = carritoObjeto[producto.titulo].cantidad + 1;
+//     }
 
-    carritoObjeto[producto.titulo] = producto;
+//     carritoObjeto[producto.titulo] = producto;
 
-    pintarCarrito();
+//     pintarCarrito();
 
-    console.log(carritoObjeto);
-}
+//     console.log(carritoObjeto);
+// }
 
-const pintarCarrito = () => {
-    carrito.textContent = "";
+// const pintarCarrito = () => {
+//     carrito.textContent = "";
 
-    Object.values(carritoObjeto).forEach(item => {
-        const clone = template.content.firstElementChild.cloneNode(true);
-        clone.querySelector(".lead").textContent = item.titulo;
-        clone.querySelector(".badge").textContent = item.cantidad;
+//     Object.values(carritoObjeto).forEach(item => {
+//         const clone = template.content.firstElementChild.cloneNode(true);
+//         clone.querySelector(".lead").textContent = item.titulo;
+//         clone.querySelector(".badge").textContent = item.cantidad;
 
-        fragment.appendChild(clone);
-    });
+//         fragment.appendChild(clone);
+//     });
  
-    carrito.appendChild(fragment);
+//     carrito.appendChild(fragment);
 
-}
+// }
 
-botones.forEach((btn) => btn.addEventListener("click", agregarCarrito));
+// botones.forEach((btn) => btn.addEventListener("click", agregarCarrito));
+
+// let a = 1;
+// let b = 2;
+
+// let result = a + b;
+
+// console.log(result);
+
+// Array methods //
+// Los objetos arrays y funciones se pasan por referencia
+
+// const frutas = ["🍌", "🍎", "🍓"];
+
+// // const nuevoArray = frutas.map((item) => {
+// //    return item; 
+// // });
+// const nuevoArray = frutas.map((fruta) => fruta); //Es lo mismo que la función de arriba
+
+// const copiaArray = frutas;
+
+// frutas.push("🍐");
+
+// console.log(copiaArray);
+
+// console.log(nuevoArray);
+
+// const users = [
+//     {uid: 1, name: "John", age: 34},
+//     {uid: 2, name: "Amy", age: 30},
+//     {uid: 3, name: "Will", age: 10},
+// ];
+
+// const names = users.map((user) => user.name);
+
+// console.log(names);
+
+// const numeros =  [1,2,3,4,5,6,7,8,9,10];
+
+// const numerosPorDos = numeros.map(num => num * 2);
+// console.log(numerosPorDos);
+
+// const mayores = users.filter((user) => user.age >= 30);
+
+// console.log(mayores);
+
+// const userFiltrado = users.filter((user) => user.uid !== 3); //Devuelve todos los usuarios que no tengan uid 3
+// console.log(userFiltrado);
+
+// const existe = users.some((user) => user.uid === 2);
+// console.log(existe);
+
+// if (existe) {
+//     const amy = users.find((user) => user.uid === 2);
+//     console.log(amy);
+    
+//     const {age} = users.find((user) => user.uid === 2); //Destructuración de datos, nos devuelve la edad de amy.
+//     console.log(age);
+// }
+
+// const indice = users.findIndex((user) => user.uid === 2);
+// console.log(users[indice]);
+
+// const arr = ["Cat", "Dog", "Tiger", "Zebra"];
+// //             0      1       2        3
+
+// const arrayNuevo = arr.slice(1, 3);
+// console.log(arrayNuevo);
+
+// //Unir arrays
+
+// const array1 = ["a", "b", "c"];
+// const array2 = ["d", "e", "f"];
+
+// const array3 = array1.concat(array2); //Método concact
+// const array4 = [...array1, "-", ...array2]//Operador Spread, traeme los elementos del array1 y traeme los elementos del array2.
+// console.log(array3);
+// console.log(array4);
+
+//Método reduce
+
+const numeros = [1,2,3,4,5];
+
+const sumarTodos = numeros.reduce((acumulador, valorActual) => acumulador + valorActual);
+//Al estar iterando sobre el array números el valor actual será los valores que va agarrando del array numeros en cada iteración, en la primera vuelta el acumulador vale 0 y le estaremos sumando 1, en la segunda vuelta el acumulador vale 1 y le estaremos sumando 2.
+
+
+console.log(sumarTodos);
