@@ -1,0 +1,12 @@
+.myDiv{
+    border: 1px solid black;
+    width: 300px;
+}
+
+/* truncar texto */
+.myDiv h1{
+    white-space: nowrap; /* Quitamos saltos de línea */
+    overflow: hidden; /* Ocultamos lo que sobresale del div */
+    text-overflow: ellipsis; /* Al texto que sobresale se ve con ...*/
+}
+
