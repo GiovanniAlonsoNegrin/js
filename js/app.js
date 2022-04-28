@@ -999,176 +999,248 @@
 
 // mega práctica
 
-const formulario         = document.querySelector("#form");
-const cardsEstudiantes   = document.querySelector("#cardsEstudiantes");
-const cardsProfesores    = document.querySelector("#cardsProfesores");
-const templateEstudiante = document.querySelector("#templateEstudiante").content;
-const templateProfesor   = document.querySelector("#templateProfesor").content;
+// const formulario         = document.querySelector("#form");
+// const cardsEstudiantes   = document.querySelector("#cardsEstudiantes");
+// const cardsProfesores    = document.querySelector("#cardsProfesores");
+// const templateEstudiante = document.querySelector("#templateEstudiante").content;
+// const templateProfesor   = document.querySelector("#templateProfesor").content;
+// const alert              = document.querySelector(".alert");
 
-const students = [];
-const teachers = [];
+// const students = [];
+// const teachers = [];
 
-class Person {
+// class Person {
 
-    static _ID = 0; //propiedad protegida estática
+//     static _ID = 0; //propiedad protegida estática
 
-    constructor(name, age){
-        this.name = name;
-        this.age = age;
-        this.id = ++this.constructor._ID; //Id autoincremental
+//     constructor(name, age){
+//         this.name = name;
+//         this.age = age;
+//         this.id = ++this.constructor._ID; //Id autoincremental
+//     };
 
-    };
+//     static showInfoUI(person, type){ //va a recibir la instancia de la persona y el tipo para saber si es estudiante o profesor
+//         if (type === "Estudiante") {
+//         // if (person instanceof Student){
+//             cardsEstudiantes.textContent = "";
+//             const fragment = document.createDocumentFragment();
 
-    static showInfoUI(person, type){ //va a recibir la instancia de la persona y el tipo para saber si es estudiante o profesor
-        if (type === "Estudiante") {
-        // if (person instanceof Student){
-            cardsEstudiantes.textContent = "";
-            const fragment = document.createDocumentFragment();
+//             person.forEach((item) => {
+//                 fragment.appendChild(item.addNewStudent());
+//             });
 
-            person.forEach((item) => {
-                fragment.appendChild(item.addNewStudent());
-            });
-
-            cardsEstudiantes.appendChild(fragment);
-        };
+//             cardsEstudiantes.appendChild(fragment);
+//         };
         
-        if (type === "Profesor") {
-            cardsProfesores.textContent = "";
-            const fragment = document.createDocumentFragment();
+//         if (type === "Profesor") {
+//             cardsProfesores.textContent = "";
+//             const fragment = document.createDocumentFragment();
 
-            person.forEach((item) => {
-                fragment.appendChild(item.addNewTeacher());
-            });
+//             person.forEach((item) => {
+//                 fragment.appendChild(item.addNewTeacher());
+//             });
 
-            cardsProfesores.appendChild(fragment);
-        };
-    };
+//             cardsProfesores.appendChild(fragment);
+//         };
+//     };
 
-};
+// };
 
-class Student extends Person{
+// class Student extends Person{
 
-    #status = false;
-    #student = "Estudiante";
+//     #status = false;
+//     #student = "Estudiante";
 
-    // constructor(name, age, status){
-    //     super(name, age);
-    //     this.#status = status;
-    // };
+//     // constructor(name, age, status){
+//     //     super(name, age);
+//     //     this.#status = status;
+//     // };
 
-    set setStatus(status){
-        this.#status = status;
-    };
+//     set setStatus(status){
+//         this.#status = status;
+//     };
 
-    get getStatus(){
-        return this.#status;
-    };
+//     get getStatus(){
+//         return this.#status;
+//     };
 
-    get getStudent(){
-        return this.#student;
-    };
+//     get getStudent(){
+//         return this.#student;
+//     };
 
-    addNewStudent(){
-        const clone = templateEstudiante.cloneNode(true);
-        clone.querySelector("h5 .text-primary").textContent = this.name;
-        clone.querySelector("h6").textContent = this.getStudent;
-        clone.querySelector("p").textContent = this.age;
+//     addNewStudent(){
+//         const clone = templateEstudiante.cloneNode(true);
+//         clone.querySelector("h5 .text-primary").textContent = this.name;
+//         clone.querySelector("h6").textContent = this.getStudent;
+//         clone.querySelector("p").textContent = this.age;
 
-        if (this.#status) {
-            clone.querySelector(".badge").className = "badge bg-success"; //className reemplaza todas las clases del elemento seleccionado
-            clone.querySelector(".btn-success").disabled = true;
-            clone.querySelector(".btn-danger").disabled = false;
-        } else {
-            clone.querySelector(".badge").className = "badge bg-danger";
-            clone.querySelector(".btn-success").disabled = false;
-            clone.querySelector(".btn-danger").disabled = true;
-        };
+//         if (this.#status) {
+//             clone.querySelector(".badge").className = "badge bg-success"; //className reemplaza todas las clases del elemento seleccionado
+//             clone.querySelector(".btn-success").disabled = true;
+//             clone.querySelector(".btn-danger").disabled = false;
+//         } else {
+//             clone.querySelector(".badge").className = "badge bg-danger";
+//             clone.querySelector(".btn-success").disabled = false;
+//             clone.querySelector(".btn-danger").disabled = true;
+//         };
 
-        clone.querySelector(".badge").textContent = this.#status ? "Aprobado" : "Suspendido";
+//         clone.querySelector(".badge").textContent = this.#status ? "Aprobado" : "Suspendido";
 
-        clone.querySelector(".btn-success").dataset.id = this.id;
-        clone.querySelector(".btn-danger").dataset.id  = this.id;
+//         clone.querySelector(".btn-success").dataset.id = this.id;
+//         clone.querySelector(".btn-danger").dataset.id  = this.id;
  
-        return clone;
-    };
+//         return clone;
+//     };
 
-};
+// };
 
-class Teacher extends Person{
+// class Teacher extends Person{
 
-    #teacher = "Profesor";
+//     #teacher = "Profesor";
 
-    // constructor(){
+//     // constructor(){
 
-    // };
+//     // };
 
-    addNewTeacher(){
-        const clone = templateProfesor.cloneNode(true);
+//     addNewTeacher(){
+//         const clone = templateProfesor.cloneNode(true);
 
-        clone.querySelector("h5").textContent = this.name;
-        clone.querySelector("h6").textContent = this.#teacher;
-        clone.querySelector("p").textContent  = this.age;
+//         clone.querySelector("h5").textContent = this.name;
+//         clone.querySelector("h6").textContent = this.#teacher;
+//         clone.querySelector("p").textContent  = this.age;
 
-        return clone;
-    };
+//         return clone;
+//     };
 
-}
+// }
 
-formulario.addEventListener("submit", e => {
-    e.preventDefault();
+// formulario.addEventListener("submit", e => {
+//     e.preventDefault();
 
-    const datos = new FormData(form); /*Recibe como parametro el id del formulario*/
-    datos.forEach((item) => console.log(item)); /* Lee los names de cada input e iteramos sobre ellos */
+//     alert.classList.add("d-none"); //Reiniciamos el alert
 
-    // console.log([...datos.values()]); //Devuelve un array con cada value de cada input
-    const [name, age, option] = [...datos.values()]; //Usamos destructuración de datos para asignarle una variable a cada value.
-    // console.log(name, age, option); //Obtenemos los valores de los inputs
+//     const datos = new FormData(form); /*Recibe como parametro el id del formulario*/
+//     datos.forEach((item) => console.log(item)); /* Lee los names de cada input e iteramos sobre ellos */
 
-    if (option === "Estudiante") {
-        const student = new Student(name, age);
-        // console.log(student);
-        students.push(student); //Añadimos las intancias de cada estudiante
-        // console.log(students);
-        Person.showInfoUI(students, option);
-    }
+//     // console.log([...datos.values()]); //Devuelve un array con cada value de cada input
+//     const [name, age, option] = [...datos.values()]; //Usamos destructuración de datos para asignarle una variable a cada value.
+//     // console.log(name, age, option); //Obtenemos los valores de los inputs
+
+//     //Validación de datos
+//     if (!name.trim() || !age.trim() || !option.trim()) { //Si alguno de los datos está en blanco.
+//         // console.log("Algún dato en blanco");
+//         alert.classList.remove("d-none");
+//         return
+//     }
+//     //Fin validación
+
+//     if (option === "Estudiante") {
+//         const student = new Student(name, age);
+//         // console.log(student);
+//         students.push(student); //Añadimos las intancias de cada estudiante
+//         // console.log(students);
+//         Person.showInfoUI(students, option);
+//     }
 
 
-    if (option === "Profesor") {
-        const teacher = new Teacher(name , age);
+//     if (option === "Profesor") {
+//         const teacher = new Teacher(name , age);
 
-        teachers.push(teacher);
+//         teachers.push(teacher);
 
-        Person.showInfoUI(teachers, option);
-    }
+//         Person.showInfoUI(teachers, option);
+//     }
 
-});
+// });
 
-document.addEventListener('click', (e) => {
-    // console.log(e.target.dataset.id);
-    if (e.target.dataset.id) {
-        // console.log(e.target.matches(".btn-success"));
-        if (e.target.matches(".btn-success")) {
-            students.map((item) => {
-                if (item.id === Number(e.target.dataset.id)) { //Pasámos a int e.target.dataset.id ya que no devuelve un string
-                    console.log("DENTROO");
-                    item.setStatus = true;
-                };
-                // console.log(item);
-                return item;
-            });
-        };
-        if (e.target.matches(".btn-danger")) {
-            students.map((item) => {
-                if (item.id === Number(e.target.dataset.id)) { //Pasámos a int e.target.dataset.id ya que no devuelve un string
-                    item.setStatus = false;
-                };
-                // console.log(item);
-                return item;
-            });
-        };
-        Person.showInfoUI(students, "Estudiante");
-    } else {
+// document.addEventListener('click', (e) => {
+//     // console.log(e.target.dataset.id);
+//     if (e.target.dataset.id) {
+//         // console.log(e.target.matches(".btn-success"));
+//         if (e.target.matches(".btn-success")) {
+//             students.map((item) => {
+//                 if (item.id === Number(e.target.dataset.id)) { //Pasámos a int e.target.dataset.id ya que no devuelve un string
+//                     console.log("DENTROO");
+//                     item.setStatus = true;
+//                 };
+//                 // console.log(item);
+//                 return item;
+//             });
+//         };
+//         if (e.target.matches(".btn-danger")) {
+//             students.map((item) => {
+//                 if (item.id === Number(e.target.dataset.id)) { //Pasámos a int e.target.dataset.id ya que no devuelve un string
+//                     item.setStatus = false;
+//                 };
+//                 // console.log(item);
+//                 return item;
+//             });
+//         };
+//         Person.showInfoUI(students, "Estudiante");
+//     } else {
         
-    };
-});
+//     };
+// });
 // fin mega práctica
+
+//Módulos ES NECESARIO HACERLO DESDE UN SERVIDOR.
+
+//Función auto ejecutable IIFE
+
+// (function(){
+//     const fruit = "🍌";
+//     console.log(fruit);
+// })()
+
+// const name = "giovanni";
+
+// // import {sandia} from "./fruits.js";
+// // import {pintarPlatano} from "./fruits.js";
+// // import {frutilla} from "./fruits.js";
+// // import {Fruit} from "./fruits.js";
+// import melon, {pintarPlatano, frutilla as fresa, Fruit} from "./fruits.js";
+// // import melon from "./fruits.js";
+
+// const guinda = new Fruit("🍒");
+
+// console.log(melon);
+// pintarPlatano();
+// fresa();
+// console.log(guinda.name);
+//Fin módulos
+
+//Local Storage
+
+// localStorage.setItem("sandia", "🍉")
+// localStorage.setItem("banana", "🍌");
+
+// if (localStorage.getItem("banana")) {
+//     const myBanana = localStorage.getItem("banana");
+//     console.log(myBanana);
+// };
+
+// // localStorage.removeItem("banana");
+
+// localStorage.clear(); //Elimina todos los elementos guardados
+
+const frutas = [
+    {
+        name: "🍌",
+        color: "yellow",
+    },
+    {
+        name: "🍒",
+        color: "red",
+    },
+    {
+        name: "🍐",
+        color: "green",
+    },
+];
+
+localStorage.setItem("frutas", JSON.stringify(frutas)); //Convertimos a un string al array de objetos.
+
+if (localStorage.getItem("frutas")) {
+    const fruits = JSON.parse(localStorage.getItem("frutas"));
+    console.log(fruits);
+};
