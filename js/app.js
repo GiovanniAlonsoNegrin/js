@@ -1223,24 +1223,103 @@
 
 // localStorage.clear(); //Elimina todos los elementos guardados
 
-const frutas = [
-    {
-        name: "🍌",
-        color: "yellow",
-    },
-    {
-        name: "🍒",
-        color: "red",
-    },
-    {
-        name: "🍐",
-        color: "green",
-    },
-];
+// const frutas = [
+//     {
+//         name: "🍌",
+//         color: "yellow",
+//     },
+//     {
+//         name: "🍒",
+//         color: "red",
+//     },
+//     {
+//         name: "🍐",
+//         color: "green",
+//     },
+// ];
 
-localStorage.setItem("frutas", JSON.stringify(frutas)); //Convertimos a un string al array de objetos.
+// localStorage.setItem("frutas", JSON.stringify(frutas)); //Convertimos a un string al array de objetos.
 
-if (localStorage.getItem("frutas")) {
-    const fruits = JSON.parse(localStorage.getItem("frutas"));
-    console.log(fruits);
+// if (localStorage.getItem("frutas")) {
+//     const fruits = JSON.parse(localStorage.getItem("frutas"));
+//     console.log(fruits);
+// };
+
+//Práctica
+
+const alert    = document.getElementById("alert");
+const form     = document.getElementById("form");
+const showAll  = document.getElementById("showAll");
+const template = document.getElementById("templateTodo").content;
+
+let todos = [];
+
+let id = 0;
+
+const agregarTodo = (todo, id) => {
+    const objTodo = {
+        name: todo,
+        id: id,
+    };
+
+    todos.push(objTodo);
 };
+
+const showTodos = () => {
+    
+    localStorage.setItem('todos', JSON.stringify(todos));
+
+    showAll.textContent = "";
+
+    const fragment = document.createDocumentFragment();
+
+    todos.forEach((item) => {
+        const clone = template.cloneNode(true);
+        clone.querySelector("p").textContent = item.name;
+        clone.querySelector(".btn").dataset.id = item.id;
+
+        fragment.appendChild(clone);
+    });
+
+    showAll.appendChild(fragment);
+};
+
+//delegación de eventos
+document.addEventListener("click" , (e) => {
+    console.log(e.target.dataset.id);
+    console.log(e.target.matches(".btn-danger"));
+
+    if (e.target.matches(".btn-danger")) {
+        // console.log("Diste clic al boton elimiar");
+        todos = todos.filter(item => item.id !== Number(e.target.dataset.id)); //Devuelve un array con todos los demás elementos, quitando el elemento clicando.
+        showTodos();
+    };
+});
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    id++;
+
+    alert.classList.add("d-none");
+
+    const data = new FormData(form);
+
+    const [todo] = [...data.values()]; //Devuelve un array(Destructuración).
+
+    if (!todo.trim()) { //Si todo esta vacío (Trim limpia todos los espacios al final y al principio y al realizar la negación nos devuelve true si no existe un string en su interior).
+        alert.classList.remove("d-none");
+        return //Salimos para que no siga con nuestro código.
+    };
+
+    agregarTodo(todo, id);
+    showTodos();
+
+});
+
+document.addEventListener("DOMContentLoaded", (e) => {
+    if (localStorage.getItem("todos")) {
+        todos = JSON.parse(localStorage.getItem("todos"));
+        showTodos();
+    };
+});

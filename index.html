@@ -359,6 +359,43 @@
 
     <!-- fin mega práctica -->
 
+    <!-- práctica local storage -->
+
+    <div class="container my-5">
+        <h1>Todo app</h1>
+
+        <section id="alert" class="alert alert-danger d-none">Todos los campos son obligatorios</section>
+
+        <form id="form">
+            
+            <input 
+                type="text"
+                name="name"
+                placeholder="Ingrese un Todo"
+                class="form-control mb-2"
+                value="todo 1"
+                required
+            >
+
+            <button class="btn btn-primary w-100" type="submit">Agregar</button>
+
+        </form>
+
+        <section id="showAll" class="mt-3"></section>
+    </div>
+
+    <template id="templateTodo">
+        <article class="alert alert-warning d-flex align-items-center justify-content-between">
+            <p class="lead mb-0">lorem</p>
+            <div>
+                <button class="btn btn-danger">Borrar</button>
+            </div>
+        </article>
+    </template>
+
+    <!-- finpráctica local storage -->
+
+
     <script src="js/app.js" type="module"></script>
     <!-- <script src="js/fruits.js"></script> -->
 </body>
